@@ -1,13 +1,125 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css?family=Inter');
+@import url('https://fonts.googleapis.com/css?family=Karla');
+
+* {
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  background-color: rgba(8, 42, 103, 0.85);
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+main {
+  background-color: #F5F7FB;
+  margin: 10% auto;
+  padding: 20px;
+  min-height: 800px;
+  max-width: 800px;
+  border-radius: 10px;
+}
+
+.quiz-intro {
+  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 25%;
+}
+
+.quiz-intro>h1 {
+  font-family: Karla;
+  font-weight: 700;
+  font-size: 46px;
+  margin-bottom: 10px;
+}
+
+.title-desc {
+  font-weight: 400;
+  margin-top: 10px;
+}
+
+.quiz-intro>button {
+  background-color: #4D5B9E;
+  color: #F5F7FB;
+  border: none;
+  width: 193px;
+  height: 52px;
+  border-radius: 8px;
+  margin: 40px;
+  font-family: Inter;
+  font-weight: 500;
+}
+
+.btn-disabled {
+  opacity: 50%;
+  cursor: not-allowed;
+}
+
+.check-ans-btn {
+  background-color: #4D5B9E;
+  color: #F5F7FB;
+  border: none;
+  width: 193px;
+  height: 52px;
+  border-radius: 8px;
+  margin: 30px auto;
+  font-family: Inter;
+  font-weight: 500;
+}
+
+
+.answers-section {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.answer-btn {
+  background-color: #F5F7FB;
+  color: #293264;
+  border: 1px solid #293264;
+  border-radius: 6px;
+  padding: 10px 25px;
+  font-size: 1rem;
+  margin: 0px 10px 25px 10px;
+}
+
+.answer-btn-selected {
+  background-color: #D6DBF5;
+  border: 1px solid #D6DBF5;
+}
+
+.answer-btn-selected.answer-btn-correct {
+  background-color: #94D7A2;
+  border: 1px solid #94D7A2;
+}
+
+.answer-btn-selected.answer-btn-wrong {
+  background-color: #94D7A2;
+  border: 1px solid #94D7A2;
+}
+
+.answer-btn-not-selected.answer-btn-correct {
+  background-color: #F8BCBC;
+  border: 1px solid #F8BCBC;
+  opacity: 50%;
+}
+
+.answer-btn-not-selected.answer-show {
+  opacity: 50%;
+}
+
+.game-score {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 60px;
+}
+
+.score-and-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
