@@ -3,8 +3,11 @@ import React, { useState, useEffect } from "react"
 import { nanoid } from "nanoid";
 import Question from "./components/Question"
 import './index.css';
+import categoryObject from "./components/categoryObject"
+import difficultyObject from "./components/difficultyObject"
 
 export default function App() {
+
   const [gameStarted, setGameStarted] = useState(false)
   const [triviaData, setTriviaData] = useState([])
   const [showAnswer, setShowAnswer] = useState(false)
@@ -12,7 +15,12 @@ export default function App() {
   const [gameOver, setGameOver] = useState(false)
   const [correctCount, setCorrectCount] = useState(0)
 
-  const apiUrl = "https://opentdb.com/api.php?amount=5&type=multiple"
+  const [triviaOptions, setTriviaOptions] = useState({ category: "", difficulty: "" })
+  const [apiUrl, setApiUrl] = useState("https://opentdb.com/api.php?amount=5&type=multiple")
+
+  useEffect(() => {
+    setApiUrl(`https://opentdb.com/api.php?amount=5&type=multiple&category=${triviaOptions.category}&difficulty${triviaOptions.difficulty}`)
+  }, [triviaOptions])
 
   useEffect(() => {
     if (gameStarted) {
@@ -54,7 +62,6 @@ export default function App() {
         }
       )))
       .then(newArray => {
-        console.log(newArray)
         setTriviaData(newArray)
       })
   }
@@ -80,6 +87,28 @@ export default function App() {
     setGameOver(false)
     setGameStarted(false)
   }
+
+  function handleOptionSelection(e) {
+    const { name, value } = e.target
+    setTriviaOptions(prev =>
+    ({
+      ...prev
+      , [name]: value
+    }))
+  }
+
+  const triviaCategories = categoryObject.map(category => {
+    return (
+      <option className="select-options" value={category.value}>{category.name}</option>
+    )
+  })
+
+  const triviaDifficulties = difficultyObject.map(element => {
+    return (
+      <option className="select-options" value={element.value}>{element.name}</option>
+    )
+  })
+
 
   const questionElements = triviaData.map(question => {
     return (
@@ -113,6 +142,30 @@ export default function App() {
         : <section className="quiz-intro">
           <h1 >Trivia!</h1>
           <p className="title-desc">Tease your brain cells by answer these trivia questions!</p>
+          <div className="select-container">
+            <label className="category-label" htmlFor="category">Category:</label>
+            <select
+              name="category"
+              id="category"
+              className="category-select"
+              value={triviaOptions.category}
+              onChange={handleOptionSelection}
+            >
+              {triviaCategories}
+            </select>
+          </div>
+          <div className="select-container">
+            <label className="difficulty-label" htmlFor="difficulty">Difficulty:</label>
+            <select
+              name="difficulty"
+              id="difficulty"
+              className="difficulty-select"
+              value={triviaOptions.difficulty}
+              onChange={handleOptionSelection}
+            >
+              {triviaDifficulties}
+            </select>
+          </div>
           <button className="start-quiz-btn" onClick={startGame}>Start quiz!</button>
         </section>
       }
